@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Selectable Data</title>
+    <script defer src="final.js"></script>
+    <meta charset="UTF-8" content="width=device-width">
+    <link rel="stylesheet" type="text/css" href="final.css">
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://kit.fontawesome.com/71ab2b3c09.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- tab buttons-->
+    <div class="tabMain1">
+        <i class="fa-solid fa-magnifying-glass">&nbsp;</i>
+        <select name="selectData" id="selectData" onchange="openTab(event, this.value)">
+            <option value='select'>-Select-</option>
+            <option value="tabs1" onclick="getWeatherData2('now','rain')">Rain</option>
+            <option value="tabs2" onclick="getWeatherData2('now','wind_speed')">Wind Speed</option>
+            <option value="tabs3" onclick="getWeatherData2('now','wind_direction')">Wind Direction</option>
+            <option value="tabs4" onclick="getWeatherData2('now','light')">Light</option>
+            <option value="tabs5" onclick="getWeatherData2('now','temperature')">Temperature</option>
+            <option value="tabs6" onclick="getWeatherData2('now','humidity_out')">Outdoor Humidity</option>
+            <option value="tabs7" onclick="getWeatherData2('now','humidity_in')">Indoor Humidity</option>
+        </select>
+    </div>
+
+    <div id="tabs1" class="tabcontent">
+        <h3>Rain</h3>
+        <p>In this page is the rain data recorded.</p>
+        <i class="fa-solid fa-clock"></i>
+        <label for="time_interval">Choose the time interval you want for value:</label>
+        <select name="time_interval" id="time_interval" onclick="getWeatherData2(this.value,'rain')">
+            <option value='select'>-Select-</option>
+            <option value='now'>Now</option>
+            <option value='24'>24 hours</option>
+            <option value='48'>48 hours</option>
+            <option value='72'>72 hours</option>
+            <option value='168'>1 week</option>
+        </select>
+        <p>Chart type:&nbsp;<i class="fa-solid fa-chart-line"></i></p>
+        <br>
+        <div id="rain"></div>
+        <br></br>
+        <div>
+            <canvas id="rainChar"></canvas>
+        </div>
+    </div>
+
+    <div id="tabs2" class="tabcontent">
+        <h3>Wind Speed</h3>
+        <p>In this page is the wind speed data recorded.</p>
+        <i class="fa-solid fa-clock"></i>
+        <label for="time_interval">Choose the time interval you want for value:</label>
+        <select name="time_interval" id="time_interval" onclick="getWeatherData2(this.value,'wind_speed')">
+            <option value='select'>-Select-</option>
+            <option value='now'>Now</option>
+            <option value='24'>24 hours</option>
+            <option value='48'>48 hours</option>
+            <option value='72'>72 hours</option>
+            <option value='168'>1 week</option>
+        </select>
+        <p>Chart type:&nbsp;<i class="fa-solid fa-chart-line"></i></p>
+        <br>
+        <div id="wind_speed"></div>
+        <br></br>
+        <div>
+            <canvas id="wind_speedChar"></canvas>
+        </div>
+    </div>
+
+    <div id="tabs3" class="tabcontent">
+        <h3>Wind Direction</h3>
+        <p>In this page is the wind direction data recorded.</p>
+        <i class="fa-solid fa-clock"></i>
+        <label for="time_interval">Choose the time interval you want for value:</label>
+        <select name="time_interval" id="time_interval" onclick="getWeatherData2(this.value,'wind_direction')">
+            <option value='select'>-Select-</option>
+            <option value='now'>Now</option>
+            <option value='24'>24 hours</option>
+            <option value='48'>48 hours</option>
+            <option value='72'>72 hours</option>
+            <option value='168'>1 week</option>
+        </select>
+        <p>Chart type:&nbsp;<i class="fa-solid fa-chart-line"></i></p>
+        <br>
+        <div id="wind_direction"></div>
+        <br></br>
+        <div>
+            <canvas id="wind_directionChar"></canvas>
+        </div>
+    </div>
+
+    <div id="tabs4" class="tabcontent">
+        <h3>Light</h3>
+        <p>In this page is the light data recorded.</p>
+        <i class="fa-solid fa-clock"></i>
+        <label for="time_interval">Choose the time interval you want for value:</label>
+        <select name="time_interval" id="time_interval" onclick="getWeatherData2(this.value,'light')">
+            <option value='select'>-Select-</option>
+            <option value='now'>Now</option>
+            <option value='24'>24 hours</option>
+            <option value='48'>48 hours</option>
+            <option value='72'>72 hours</option>
+            <option value='168'>1 week</option>
+        </select>
+        <p>Chart type:&nbsp;<i class="fa-solid fa-chart-line"></i></p>
+        <br>
+        <div id="light"></div>
+        <br></br>
+        <div>
+            <canvas id="lightChar"></canvas>
+        </div>
+    </div>
+
+    <div id="tabs5" class="tabcontent">
+        <h3>Temperature</h3>
+        <p>In this page is the temperature data recorded.</p>
+        <i class="fa-solid fa-clock"></i>
+        <label for="time_interval">Choose the time interval you want for value:</label>
+        <select name="time_interval" id="time_interval" onclick="getWeatherData2(this.value,'temperature')">
+            <option value='select'>-Select-</option>
+            <option value='now'>Now</option>
+            <option value='24'>24 hours</option>
+            <option value='48'>48 hours</option>
+            <option value='72'>72 hours</option>
+            <option value='168'>1 week</option>
+        </select>
+        <p>Chart type:&nbsp;<i class="fa-solid fa-chart-line"></i></p>
+        <br>
+        <div id="temperature"></div>
+        <br></br>
+        <div>
+            <canvas id="temperatureChar"></canvas>
+        </div>
+    </div>
+
+    <div id="tabs6" class="tabcontent">
+        <h3>Outdoor Humidity</h3>
+        <p>In this page is the outdoor humidity data recorded.</p>
+        <i class="fa-solid fa-clock"></i>
+        <label for="time_interval">Choose the time interval you want for value:</label>
+        <select name="time_interval" id="time_interval" onclick="getWeatherData2(this.value,'humidity_out')">
+            <option value='select'>-Select-</option>
+            <option value='now'>Now</option>
+            <option value='24'>24 hours</option>
+            <option value='48'>48 hours</option>
+            <option value='72'>72 hours</option>
+            <option value='168'>1 week</option>
+        </select>
+        <p>Chart type:&nbsp;<i class="fa-solid fa-chart-line"></i></p>
+        <br>
+        <div id="humidity_out"></div>
+        <br></br>
+        <div>
+            <canvas id="humidity_outChar"></canvas>
+        </div>
+    </div>
+
+    <div id="tabs7" class="tabcontent">
+        <h3>Indoor Humidity</h3>
+        <p>In this page is the indoor humidity data recorded.</p>
+        <i class="fa-solid fa-clock"></i>
+        <label for="time_interval">Choose the time interval you want for value:</label>
+        <select name="time_interval" id="time_interval" onclick="getWeatherData2(this.value,'humidity_in')">
+            <option value='select'>-Select-</option>
+            <option value='now'>Now</option>
+            <option value='24'>24 hours</option>
+            <option value='48'>48 hours</option>
+            <option value='72'>72 hours</option>
+            <option value='168'>1 week</option>
+        </select>
+        <p>Chart type:&nbsp;<i class="fa-solid fa-chart-line"></i></p>
+        <br>
+        <div id="humidity_in"></div>
+        <br></br>
+        <div>
+            <canvas id="humidity_inChar"></canvas>
+        </div>
+    </div>
+
+</body>
+
+</html>

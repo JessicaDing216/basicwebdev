@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>User Input</title>
+    <script defer src="final.js"></script>
+    <meta charset="UTF-8" content="width=device-width">
+    <link rel="stylesheet" type="text/css" href="final.css">
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://kit.fontawesome.com/71ab2b3c09.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- tab buttons-->
+    <div class="tabMain1">
+        <i class="fa-solid fa-magnifying-glass">&nbsp;</i>
+        <select name="selectData" id="selectData" onchange="openTab(event, this.value)">
+            <option value='select'>-Select-</option>
+            <option value="tabs1" onclick="getWeatherData2('now','rain')">Rain</option>
+            <option value="tabs2" onclick="getWeatherData2('now','wind_speed')">Wind Speed</option>
+            <option value="tabs3" onclick="getWeatherData2('now','wind_direction')">Wind Direction</option>
+            <option value="tabs4" onclick="getWeatherData2('now','light')">Light</option>
+            <option value="tabs5" onclick="getWeatherData2('now','temperature')">Temperature</option>
+            <option value="tabs6" onclick="getWeatherData2('now','humidity_out')">Outdoor Humidity</option>
+            <option value="tabs7" onclick="getWeatherData2('now','humidity_in')">Indoor Humidity</option>
+        </select>
+
+    </div>
+    <div id="tabs1" class="tabcontent">
+        <h3>Rain</h3>
+        <p>In this page is the rain data recorded.</p>
+        <p>Please enter how many days of data you want to show, then click "Submit" to submit the form:</p>
+
+        <form id="userIn">
+            <i class="fa-solid fa-circle-question">&nbsp;</i>
+            <label for="day"> How many days: </label><input id="userInP1" name="day1" type="number" value="0">
+            <button type="reset" onclick="userIn1('rain')">Submit</button>
+        </form>
+        <p id="message1"></p>
+        <p>Chart type:&nbsp;<i class="fa-solid fa-chart-line"></i></p>
+        <br>
+        <div id="rain"></div>
+        <div>
+            <canvas id="rainChar"></canvas>
+        </div>
+    </div>
+
+    <div id="tabs2" class="tabcontent">
+        <h3>Wind Speed</h3>
+        <p>In this page is the wind speed data recorded.</p>
+        <p>Please enter how many days of data you want to show, then click "Submit" to submit the form:</p>
+
+        <form id="userIn">
+            <i class="fa-solid fa-circle-question">&nbsp;</i>
+            <label for="day"> How many days: </label><input id="userInP2" name="day2" type="number" value="0">
+            <button type="reset" onclick="userIn2('wind_speed')">Submit</button>
+        </form>
+        <p id="message2"></p>
+        <p>Chart type:&nbsp;<i class="fa-solid fa-chart-line"></i></p>
+        <br>
+        <div id="wind_speed"></div>
+        <div>
+            <canvas id="wind_speedChar"></canvas>
+        </div>
+    </div>
+
+    <div id="tabs3" class="tabcontent">
+        <h3>Wind Direction</h3>
+        <p>In this page is the wind direction data recorded.</p>
+        <p>Please enter how many days of data you want to show, then click "Submit" to submit the form:</p>
+
+        <form id="userIn">
+            <i class="fa-solid fa-circle-question">&nbsp;</i>
+            <label for="day"> How many days: </label><input id="userInP3" name="day3" type="number" value="0">
+            <button type="reset" onclick="userIn3('wind_direction')">Submit</button>
+        </form>
+        <p id="message3"></p>
+        <p>Chart type:&nbsp;<i class="fa-solid fa-chart-line"></i></p>
+        <br>
+        <div id="wind_direction"></div>
+        <div>
+            <canvas id="wind_directionChar"></canvas>
+        </div>
+    </div>
+    <div id="tabs4" class="tabcontent">
+        <h3>Light</h3>
+        <p>In this page is the light data recorded.</p>
+        <p>Please enter how many days of data you want to show, then click "Submit" to submit the form:</p>
+
+        <form id="userIn">
+            <i class="fa-solid fa-circle-question">&nbsp;</i>
+            <label for="day"> How many days: </label><input id="userInP4" name="day4" type="number" value="0">
+            <button type="reset" onclick="userIn4('light')">Submit</button>
+        </form>
+        <p id="message4"></p>
+        <p>Chart type:&nbsp;<i class="fa-solid fa-chart-line"></i></p>
+        <br>
+        <div id="light"></div>
+        <div>
+            <canvas id="lightChar"></canvas>
+        </div>
+    </div>
+
+    <div id="tabs5" class="tabcontent">
+        <h3>Temperature</h3>
+        <p>In this page is the temperature data recorded.</p>
+        <p>Please enter how many days of data you want to show, then click "Submit" to submit the form:</p>
+
+        <form id="userIn">
+            <i class="fa-solid fa-circle-question">&nbsp;</i>
+            <label for="day"> How many days: </label><input id="userInP5" type="number" value="0">
+            <button type="reset" onclick="userIn5('temperature')">Submit</button>
+        </form>
+        <p id="message5"></p>
+        <p>Chart type:&nbsp;<i class="fa-solid fa-chart-line"></i></p>
+        <br>
+        <div id="temperature"></div>
+        <div>
+            <canvas id="temperatureChar"></canvas>
+        </div>
+    </div>
+
+    <div id="tabs6" class="tabcontent">
+        <h3>Outdoor Humidity</h3>
+        <p>In this page is the outdoor humidity data recorded.</p>
+        <p>Please enter how many days of data you want to show, then click "Submit" to submit the form:</p>
+
+        <form id="userIn">
+            <i class="fa-solid fa-circle-question">&nbsp;</i>
+            <label for="day"> How many days: </label><input id="userInP6" type="number" value="0">
+            <button type="reset" onclick="userIn6('humidity_out')">Submit</button>
+        </form>
+        <p id="message6"></p>
+        <p>Chart type:&nbsp;<i class="fa-solid fa-chart-line"></i></p>
+        <br>
+        <div id="humidity_out"></div>
+        <div>
+            <canvas id="humidity_outChar"></canvas>
+        </div>
+    </div>
+
+    <div id="tabs7" class="tabcontent">
+        <h3>Indoor Humidity</h3>
+        <p>In this page is the indoor humidity data recorded.</p>
+        <p>Please enter how many days of data you want to show, then click "Submit" to submit the form:</p>
+
+        <form id="userIn">
+            <i class="fa-solid fa-circle-question">&nbsp;</i>
+            <label for="day"> How many days</label><input id="userInP7" name="day7" type="number" value="0">
+            <button type="reset" onclick="userIn7('humidity_in')">Submit</button>
+        </form>
+        <p id="message7"></p>
+        <p>Chart type:&nbsp;<i class="fa-solid fa-chart-line"></i></p>
+        <br>
+        <div id="humidity_in"></div>
+        <div>
+            <canvas id="humidity_inChar"></canvas>
+        </div>
+    </div>
+    
+</body>
+
+</html>

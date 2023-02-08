@@ -1,0 +1,69 @@
+button {
+    width: 200px;
+    background-color: #faeee7;
+    color: #33272a;
+}
+
+body {
+    background-color: #faeee7;
+    color: #594a4e;
+    font-family: courier
+}
+
+table,
+tr,
+tb {
+    background-color: #f3d2c1;
+    color: #33272a;
+    width: 100%;
+    font-family: courier
+}
+
+h1,
+h2 {
+    color: #33272a;
+    font-family: verdana;
+    text-align: center
+}
+
+.center {
+    margin: auto;
+}
+
+.tabMain {
+    overflow: hidden;
+    /* border: 1px solid #ccc; */
+    background-color: #f3d2c1;
+}
+
+/* Style the buttons inside the tab */
+.tabMain button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tabMain button:hover {
+    background-color: #fffffe;
+}
+
+/* Create an active/current tablink class */
+.tabMain button.active {
+    background-color: #ffc0ad;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    /* border: 1px solid #ccc; */
+    border-top: none;
+    font-size: 17px;
+
+}

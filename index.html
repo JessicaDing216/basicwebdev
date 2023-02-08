@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Weather Data</title>
+    <script defer src="final.js"></script>
+    <meta charset="UTF-8" content="width=device-width">
+    <link rel="stylesheet" type="text/css" href="final.css">
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://kit.fontawesome.com/71ab2b3c09.js" crossorigin="anonymous"></script>
+</head>
+
+<body onload="openTab(event, 'tab1'), getWeatherData('now','main')">
+    <h1 text-align="center"><i class="fa-solid fa-cloud-sun"></i>Weather Data Information</h1>
+    <h2 text-align="center">Here you can select which data you want to check!</h2>
+    <!-- tab buttons-->
+    <div class="tabMain">
+        <button class="tablinks" onclick="openTab(event, 'tab1'), getWeatherData('now','main')" id="defaultOpen"><i
+                class="fa-solid fa-house"></i>&nbsp; &nbsp; Main</button>
+        <button class="tablinks" onclick="openTab(event, 'tab2'),getWeatherData('now','temperature')"><i
+                class="fa-solid fa-temperature-high"></i>&nbsp; &nbsp; Temperature</button>
+        <button class="tablinks" onclick="openTab(event, 'tab3'), getWeatherData('now','wind_speed')"><i
+                class="fa-solid fa-wind"></i>&nbsp; &nbsp; Wind Speed</button>
+        <button class="tablinks" onclick="openTab(event, 'tab4')"><i class="fa-solid fa-list-ul"></i>&nbsp; &nbsp;
+            Selectable</button>
+        <button class="tablinks" onclick="openTab(event, 'tab5')"><i class="fa-solid fa-pen-to-square"></i>&nbsp; &nbsp;
+            User Defined</button>
+        <button class="tablinks" onclick="openTab(event, 'tab6')"><i class="fa-solid fa-circle-info"></i>&nbsp; &nbsp;
+            Info</button>
+    </div>
+
+    <!-- tab contents -->
+    <div id="tab1" class="tabcontent">
+        <h3><i class="fa-solid fa-cloud-arrow-down"></i>&nbsp;Latest 30 Datasets</h3>
+        <p>Overview of the latest 30 sets of data recorded.</p>
+        <div id="main"></div>
+    </div>
+
+    <div id="tab2" class="tabcontent">
+        <h3><i class="fa-solid fa-temperature-high"></i>&nbsp;Temperature</h3>
+        <p>In this page is the temperature data recorded.</p>
+        <i class="fa-solid fa-clock"></i>
+        <label for="time_interval">Choose the time interval you want for value:</label>
+        <select name="time_interval" id="time_interval" onclick="getWeatherData(this.value,'temperature')">
+            <option value='select'>-Select-</option>
+            <option value='now'>Now</option>
+            <option value='24'>24 hours</option>
+            <option value='48'>48 hours</option>
+            <option value='72'>72 hours</option>
+            <option value='168'>1 week</option>
+        </select>
+        <p>Chart type:&nbsp;<i class="fa-solid fa-chart-column"></i></p>
+        <br>
+        <div id="temperature"></div>
+        <br></br>
+        <div>
+            <canvas id="temperatureChar"></canvas>
+        </div>
+
+    </div>
+
+    <div id="tab3" class="tabcontent">
+        <h3><i class="fa-solid fa-wind"></i>&nbsp;Wind Speed</h3>
+        <p>In this page is the wind speed data recorded.</p>
+        <i class="fa-solid fa-clock"></i>
+        <label for="time_interval">Choose the time interval you want for value:</label>
+        <select name="time_interval" id="time_interval" onclick="getWeatherData(this.value,'wind_speed')">
+            <option value='select'>-Select-</option>
+            <option value='now'>Now</option>
+            <option value='24'>24 hours</option>
+            <option value='48'>48 hours</option>
+            <option value='72'>72 hours</option>
+            <option value='168'>1 week</option>
+        </select>
+        <p>Chart type:&nbsp;<i class="fa-solid fa-chart-column"></i></p>
+        <br>
+        <div id="wind_speed"></div>
+        <br></br>
+        <div>
+            <canvas id="wind_speedChar"></canvas>
+        </div>
+    </div>
+
+    <div id="tab4" class="tabcontent">
+        <h3><i class="fa-solid fa-list-ul"></i>&nbsp;Select Data</h3>
+        <p>Please select the type of measurement you want to display, then Choose your desired time range.</p>
+        <iframe src="dropdown.html" width="100%" height="800px " style="border:none;"></iframe>
+    </div>
+
+    <div id="tab5" class="tabcontent">
+        <h3><i class="fa-solid fa-pen-to-square"></i>&nbsp;Input Data Range</h3>
+        <p>Please select the type of measurement you want to display, then input your desired time range.</p>
+        <iframe src="dropdown2.html" width="100%" height="800px " style="border:none;"></iframe>
+    </div>
+
+    <div id="tab6" class="tabcontent">
+        <h3><i class="fa-solid fa-user-pen"></i>&nbsp;The Auther Info</h3>
+        <p>In this page are the info of the creater of this site.</p>
+        <p>Name: Chou-Ping Ding</p>
+        <p>Email: chou-ping.ding@tuni.fi</p>
+        <p>Course Implementation: 3006</p>
+    </div>
+
+</body>
+
+</html>
